@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Clone') {
             steps {
                 git 'https://github.com/24B81A66E9/cicdproject.git'
@@ -21,15 +20,9 @@ pipeline {
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Run Container') {
             steps {
-                sh 'docker rm -f student-container || true'
-            }
-        }
-
-        stage('Run New Container') {
-            steps {
-                sh 'docker run -d -p 8081:8080 --name student-container student-app'
+                sh 'docker run -d -p 8080:8080 student-app'
             }
         }
     }
